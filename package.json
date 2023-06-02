@@ -13,8 +13,8 @@
   "main": "./extension.js",
   "contributes": {
     "commands": [{
-      "command": "blameit.helloWorld",
-      "title": "Hello World"
+      "command": "blameit.gitblame",
+      "title": "Blame On"
     }]
   },
   "scripts": {
