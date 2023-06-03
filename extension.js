@@ -2,6 +2,15 @@ const vscode = require('vscode');
 const { spawn } = require('child_process');
 
 let lastAuthor = '';
+//This decoration type is used to add a visual indicator to the editor, specifically after each line of code that is blamed.
+const decorationType = vscode.window.createTextEditorDecorationType({
+	after: {
+	  contentText: ' ',
+	  margin: '0 0 0 2em',
+	  width: 'fit-content',
+	  textDecoration: 'none; font-size: 0.8em; opacity: 0.6'
+	}
+  });
 
 function activate(context) {
 	
@@ -11,15 +20,8 @@ function activate(context) {
 		vscode.window.showInformationMessage('Git Blame command is triggered!');
 	  });
 
-	//This decoration type is used to add a visual indicator to the editor, specifically after each line of code that is blamed.
-	const decorationType = vscode.window.createTextEditorDecorationType({
-		after: {
-		  contentText: ' ',
-		  margin: '0 0 0 2em',
-		  width: 'fit-content',
-		  textDecoration: 'none; font-size: 0.8em; opacity: 0.6'
-		}
-	  });
+	
+	
 	//This is set up to track changes in the text editor's selection. Whenever the selection changes, the event handler is executed.
 	let disposable = vscode.window.onDidChangeTextEditorSelection((event) => {
 		const { activeTextEditor } = vscode.window;
@@ -89,7 +91,15 @@ function activate(context) {
   
 }
 
-function deactivate() {}
+function deactivate() {
+	// Dispose of the decoration type created earlier
+	decorationType.dispose();
+
+	// Show a message in the status bar when the extension is deactivated
+	vscode.window.setStatusBarMessage('Git Blame extension has been deactivated.');
+
+	console.log('Git Blame extension deactivated.');
+}
 
 module.exports = {
   activate,
