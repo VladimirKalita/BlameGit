@@ -4,7 +4,7 @@ This is the README for your extension "blameit". After writing up a brief descri
 
 ## Features
 
-This is a VS Code Extension for features like git blame. For now, it will only display the author name next to the line in a file.
+This is a VS Code Extension for features like git blame. For  now, it will only display the author name next to the line in a file.
 
 ## Instructions
 -Clone this repo and open it in VS Code.
